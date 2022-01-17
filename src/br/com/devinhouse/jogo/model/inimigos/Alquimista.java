@@ -14,9 +14,4 @@ public class Alquimista extends Inimigo {
     public Alquimista() {
         super(SAUDE_MAXIMA_ALQUIMISTA, ATAQUE_ALQUIMISTA, DEFESA_ALQUIMISTA, ARMA_ALQUIMISTA);
     }
-
-    @Override
-    public void atacar(Personagem alvo) {
-
-    }
 }

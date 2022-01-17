@@ -1,10 +1,13 @@
 package br.com.devinhouse.jogo.main;
 
 import br.com.devinhouse.jogo.controller.BatalhaFinalController;
+import br.com.devinhouse.jogo.controller.Combate;
 import br.com.devinhouse.jogo.controller.JogadorController;
 import br.com.devinhouse.jogo.model.Armadilha;
 import br.com.devinhouse.jogo.model.Jogador;
+import br.com.devinhouse.jogo.model.inimigos.Alquimista;
 import br.com.devinhouse.jogo.model.inimigos.Armeiro;
+import br.com.devinhouse.jogo.model.inimigos.Lider;
 
 import java.util.Scanner;
 
@@ -183,24 +186,41 @@ public class BatalhaFinal {
 		// TODO: instanciar objeto Armeiro
 		Armeiro armeiro = new Armeiro();
 
-		// TODO: iniciar loop de combate, inimigo ataca primeiro
 
-		
+		// TODO: iniciar loop de combate, inimigo ataca primeiro
+		Combate.iniciaCombate(jogador, armeiro, false);
+
 		System.out.println("Após derrotar o Armeiro, você percebe que seus equipamentos estão muito danificados.\n"
 				+ "Olha em volta, encarando todas aquelas peças de armaduras resistentes e em ótimo estado.");
-		
+
 		// TODO: perguntar ao jogador se ele quer ou não pegar as armaduras novas.
+		repetir = true;
+		boolean pegaArmadura = false;
+		do {
+			try {
+				pegaArmadura = batalhaFinalController.pegarArmadura();
+				repetir = false;
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		} while(repetir);
+
 		// TODO: Se escolher pegar
+		if(pegaArmadura) {
 			System.out.println("Você resolve usar os equipamentos do inimigo contra ele, e trocar algumas peças suas,\n"
 					+ "que estavam danificadas, pelas peças de armaduras existentes na sala.\n"
 					+ "De armadura nova, você se sente mais protegido para os desafios à sua frente.");
 			// TODO: deve ser acrescentado +5 pontos de defesa para o jogador.
-		// TODO: se não
+			jogador.setPontosDeDefesa(5);
+
+			// TODO: se não
+		} else {
 			System.out.println("Você decide que não precisa utilizar nada que venha das mãos do inimigo.");
-		
+		}
+
 		System.out.println("Em uma mesa, você encontra uma chave dourada, e sabe que aquela chave abre uma das fechaduras da porta do líder inimigo.\n"
 				+ "Você pega a chave e guarda numa pequena bolsa que leva presa ao cinto.");
-		
+
 		System.out.println("Você retorna à sala anterior e se dirige à porta da esquerda.\n"
 				+ "Você se aproxima, tentando ouvir o que acontece porta adentro, mas não escuta nada.\n"
 				+ "Segura com mais força sua arma com uma mão, enquanto empurra a porta com a outra.\n"
@@ -211,40 +231,74 @@ public class BatalhaFinal {
 		System.out.println("No fundo da sala, olhando em sua direção, está outro dos capitães do inimigo.\n"
 				+ "Um orque horrendo, de armadura, cajado em punho, em posição de combate. Ele avança em sua direção.");
 		// TODO: instanciar objeto Alquimista
+		Alquimista alquimista = new Alquimista();
+
 		// TODO: iniciar loop de combate, inimigo ataca primeiro
-		
+		Combate.iniciaCombate(jogador, alquimista, false);
+
 		System.out.println("Após derrotar o Alquimista, você olha em volta, tentando reconhecer alguma poção do estoque do inimigo.\n"
 				+ "Em uma mesa, você reconhece uma pequena garrafa de vidro contendo um líquido levemente rosado,\n"
 				+ "pega a garrafa e pondera se deve beber um gole.");
 		// TODO: perguntar ao jogador se ele quer ou não beber.
+		repetir = true;
+		boolean pegaPocao = false;
+		do {
+			try {
+				pegaPocao = batalhaFinalController.pegarPocao();
+				repetir = false;
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+
+		} while (repetir);
+
 		// TODO: Se escolher beber
+		if (pegaPocao) {
 			System.out.println("Você se sente revigorado para seguir adiante!");
 			// TODO: pontos de saúde do jogador devem ser restaurados 100%
-		// TODO: se não
+			jogador.setPontosDeSaude(200);
+
+			// TODO: se não
+		} else {
 			System.out.println("Você fica receoso de beber algo produzido pelo inimigo.");
-		
+		}
+
 		System.out.println("Ao lado da porta, você vê uma chave dourada em cima de uma mesa,\n"
 				+ "e sabe que aquela chave abre a outra fechadura da porta do líder inimigo.\n"
 				+ "Você pega a chave e guarda na pequena bolsa que leva presa ao cinto.");
-		
+
 		System.out.println("De volta à sala das portas, você se dirige à porta final.\n"
 				+ "Coloca as chaves nas fechaduras, e a porta se abre.\n"
 				+ "Seu coração acelera, memórias de toda a sua vida passam pela sua mente,\n"
 				+ "e você percebe que está muito próximo do seu objetivo final.\n"
 				+ "Segura sua arma com mais firmeza, foca no combate que você sabe que irá se seguir, e adentra a porta.");
-		
+
 		System.out.println("Lá dentro, você vê o líder sentado em uma poltrona dourada, com duas fogueiras de cada lado, e prisioneiros acorrentados às paredes.");
-		
+
 		System.out.println("Ele percebe sua chegada e se levanta com um salto, apanhando seu machado de guerra de lâmina dupla.");
-		
+
 		// TODO: jogador deve decidir se ataca ou espera
+		repetir = true;
+		boolean atacaPrimeiro = false;
+		do {
+			try {
+				atacaPrimeiro = batalhaFinalController.perguntaSeQuerAtacarPrimeiro();
+				repetir = false;
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		} while (repetir);
+
+		Lider lider = new Lider();
+
 		// TODO: iniciar loop de combate, dependendo da resposta do jogador, ele ataca primeiro
-		
+		Combate.iniciaCombate(jogador, lider, atacaPrimeiro);
+
 		System.out.println("Você conseguiu!");
 		// TODO: exibir mensagem de vitória de acordo com a motivação do jogador:
 		// se vingança: Você obteve sua vingança. Você se ajoelha e cai no choro, invadido por uma sensação de alívio e felicidade. Você se vingou, tudo que sempre quis, está feito. Agora você pode seguir sua vida.
 		// se glória: O êxtase em que você se encontra não cabe dentro de si. Você se ajoelha e grita de alegria. A glória o aguarda, você a conquistou.
-		
+
 		System.out.println("Você se levanta, olha para os prisioneiros, vai de um em um e os liberta,\n"
 				+ "e todos vocês saem em direção à noite, retornando à cidade.\n"
 				+ "Seu dever está cumprido.");

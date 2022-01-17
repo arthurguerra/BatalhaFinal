@@ -14,9 +14,4 @@ public class Armeiro extends Inimigo {
     public Armeiro() {
         super(SAUDE_MAXIMA_ARMEIRO, ATAQUE_ARMEIRO, DEFESA_ARMEIRO, ARMA_ARMEIRO);
     }
-
-    @Override
-    public void atacar(Personagem alvo) {
-
-    }
 }

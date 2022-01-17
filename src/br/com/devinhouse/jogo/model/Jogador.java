@@ -3,10 +3,6 @@ package br.com.devinhouse.jogo.model;
 import br.com.devinhouse.jogo.model.enums.Arma;
 import br.com.devinhouse.jogo.model.enums.Motivacao;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Jogador extends Personagem implements Atacante{
 
     private String nome;
@@ -36,5 +32,40 @@ public abstract class Jogador extends Personagem implements Atacante{
 
     public void setMotivacao(Motivacao motivacao) {
         this.motivacao = motivacao;
+    }
+
+    public abstract String getMensagemAtaque();
+
+    public String getMensagemMotivacao() {
+        String mensagem = "Você não estava preparado para a força do inimigo. ";
+        if (this.motivacao == Motivacao.vinganca) {
+            mensagem += "Não foi possível concluir sua vingança, e agora resta saber se alguém se vingará por você.";
+        } else {
+            String mensagemSexo;
+            mensagemSexo = this.sexo == 'm' ? "seu próximo herói." : "sua próxima heroina.";
+            mensagem += "A glória que buscavas não será sua, e a cidade aguarda por "+mensagemSexo;
+        }
+        return mensagem;
+    }
+
+    @Override
+    public void atacar(Personagem alvo) {
+        int danoCausado;
+        String mensagem = "";
+        int dado = Dado.rolarDadoDeDez();
+        if (dado == 1) {
+            mensagem += "Você errou seu ataque! O inimigo não sofreu dano algum.";
+        } else {
+            if (dado == 20) {
+                danoCausado = this.getPontosDeAtaque() + this.arma.getValorAtaqueArma() + dado;
+                mensagem += "Você acertou um ataque crítico! ";
+            } else {
+                danoCausado = this.getPontosDeAtaque() + this.arma.getValorAtaqueArma() + dado - alvo.getPontosDeDefesa();
+            }
+            alvo.recebeDano(danoCausado);
+            mensagem += this.getMensagemAtaque();
+            mensagem += String.format(" O inimigo agora possui %d pontos de vida.%n", alvo.getPontosDeSaude());
+            System.out.printf(mensagem, danoCausado);
+        }
     }
 }

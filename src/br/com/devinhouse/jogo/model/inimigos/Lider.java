@@ -14,9 +14,4 @@ public class Lider extends Inimigo{
     public Lider() {
         super(SAUDE_MAXIMA_LIDER, ATAQUE_LIDER, DEFESA_LIDER, ARMA_LIDER);
     }
-
-    @Override
-    public void atacar(Personagem alvo) {
-
-    }
 }

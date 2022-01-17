@@ -14,6 +14,40 @@ public class BatalhaFinalController {
 
     Scanner sc = new Scanner(System.in);
 
+    public boolean perguntaSeQuerAtacarPrimeiro() throws NumberFormatException{
+        int escolhaAtaque;
+        do {
+            System.out.println("Você decide...");
+            System.out.println("[ 1 ] - Atacar!");
+            System.out.println("[ 2 ] - Esperar.");
+            System.out.println("Digite sua opção: ");
+            escolhaAtaque = Integer.parseInt(sc.nextLine().trim());
+        } while (escolhaAtaque != 1 && escolhaAtaque != 2);
+        return escolhaAtaque == 1;
+    }
+
+    public boolean pegarPocao() {
+        char respostaPegarPocao;
+        do {
+            System.out.println("Beber a poção? ");
+            System.out.print("[ S / N ]: ");
+            respostaPegarPocao = sc.nextLine().trim().toLowerCase().charAt(0);
+        } while(respostaPegarPocao != 's' && respostaPegarPocao != 'n');
+
+        return respostaPegarPocao == 's';
+    }
+
+    public boolean pegarArmadura() {
+        char respostaPegarArmadura;
+        do {
+            System.out.println("Pegar armaduras novas? ");
+            System.out.print("[ S / N ]: ");
+            respostaPegarArmadura = sc.nextLine().trim().toLowerCase().charAt(0);
+        } while(respostaPegarArmadura != 's' && respostaPegarArmadura != 'n');
+
+        return respostaPegarArmadura == 's';
+    }
+
     public String passarPelaPorta() throws IllegalArgumentException{
         int escolhaPassarPorta;
         System.out.println("Você passa pela porta:");
@@ -38,6 +72,7 @@ public class BatalhaFinalController {
         System.out.println("Você segue em frente ou gostaria de desistir? ");
         System.out.println("[ 1 ] - Seguir em frente");
         System.out.println("[ 2 ] - Desistir");
+        System.out.print("Digite sua opção: ");
         escolhaContinuar = Integer.parseInt(sc.nextLine());
         if (escolhaContinuar == 1) {
             System.out.println("Você decide seguir em frente...");

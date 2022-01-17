@@ -23,7 +23,11 @@ public class Guerreiro extends Jogador {
     }
 
     @Override
-    public void atacar(Personagem alvo) {
-
+    public String getMensagemAtaque() {
+        if (this.getArma() == Arma.espada) {
+            return "Você atacou com sua espada e causou %d de dano no inimigo!";
+        } else {
+            return "Você atacou com seu machado e causou %d de dano no inimigo!";
+        }
     }
 }

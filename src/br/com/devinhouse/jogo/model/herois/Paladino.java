@@ -23,7 +23,11 @@ public class Paladino extends Jogador {
     }
 
     @Override
-    public void atacar(Personagem alvo) {
-
+    public String getMensagemAtaque() {
+        if (this.getArma() == Arma.martelo) {
+            return "Você atacou com seu martelo e causou %d de dano no inimigo!";
+        } else {
+            return "Você atacou com sua clava e causou %d de dano no inimigo!";
+        }
     }
 }

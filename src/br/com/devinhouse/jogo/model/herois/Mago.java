@@ -23,7 +23,11 @@ public class Mago extends Jogador {
     }
 
     @Override
-    public void atacar(Personagem alvo) {
-
+    public String getMensagemAtaque() {
+        if (this.getArma() == Arma.cajado) {
+            return "Você atacou com seu cajado, lançando uma bola de fogo e causou %d de dano no inimigo!";
+        } else {
+            return "Você atacou absorvendo energia do livro com uma mão e liberando com a outra e causou %d de dano no inimigo!";
+        }
     }
 }

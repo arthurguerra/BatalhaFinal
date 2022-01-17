@@ -23,7 +23,11 @@ public class Arqueiro extends Jogador {
     }
 
     @Override
-    public void atacar(Personagem alvo) {
-
+    public String getMensagemAtaque() {
+        if (this.getArma() == Arma.arco) {
+            return "Você atacou com seu arco, a flecha atingiu e causou %d de dano no inimigo!";
+        } else {
+            return "Você atacou com sua besta, o vitore atingiu e causou %d de dano no inimigo!";
+        }
     }
 }
